@@ -127,6 +127,22 @@
     <value>296, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="PictureBox3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAHAAAAAJCAIAAABlrz8VAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAHxJREFUSEvtk0EKgDAMBPMQT+Jz/KwP8w26bUJaKTXBqzuksFnay6ByzRHygV7c
+        euyWnv2fOZfN0sCoqDQUGpJ0atkrBMVXDQSETpuu3qCCxxgPHB8VNQJXloAvxWXFVw0EhDabrpk4CnWS
+        36ZlCn0n+6dXSoMzw26RPCI3DsMYE4FDISgAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="PictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAAkAAABwCAYAAADMvFoZAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wgAADsIBFShKgAAAAItJREFUWEftl8ENgDAMAxmEF2IclmUwZihJVSAJBtqKpy2dQtxr/wySpNEZMX2l
+        FAq03w+OaXALEhRf/Cc9AMsILCOwjMAy4otpXdxeuBYVDmwvXAKaBV88fJ92PLD4ghIlSgIlSpQESpQo
+        CZQoURL6pfzX95Es2VvxpT7JpkraxjmjaX8J0Sa9J6UdVD/5CMJqkPoAAAAASUVORK5CYII=
+</value>
+  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAICAQAAEABADoAgAAFgAAACgAAAAgAAAAQAAAAAEABAAAAAAAgAIAAAAAAAAAAAAAAAAAAAAA
