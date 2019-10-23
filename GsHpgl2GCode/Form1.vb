@@ -18,9 +18,9 @@ Public Class Form1
     Sub draw()
         Dim g As Graphics
         blackpen.Color = Color.Cyan
-        g = PictureBox1.CreateGraphics
+        g = PictureBox1.CreateGraphics : Application.DoEvents()
 
-        g.DrawLine(blackpen, x1, y1, x2, y2)
+        g.DrawLine(blackpen, x1, y1, x2, y2) : Application.DoEvents()
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -47,6 +47,7 @@ Public Class Form1
     End Sub
 
     Sub Convert()
+
         Button3.Enabled = False
         ProgressBar1.Value = 0
         ProgressBar2.Value = 0
@@ -54,35 +55,35 @@ Public Class Form1
         RichTextBox2.Text = Nothing
         RichTextBox3.Text = Nothing
 
-        RichTextBox2.AppendText("G0 Z0" & vbNewLine)
+        RichTextBox2.AppendText("G0 Z0" & vbNewLine) : Application.DoEvents()
 
-        For Each line In RichTextBox1.Lines
+        For Each line In RichTextBox1.Lines : Application.DoEvents()
 
             If line.Contains("PU") AndAlso line.Contains(",") Then
-                RichTextBox2.AppendText(line.Replace("PU", "G0 X").Replace(",", " Y").Replace(";", "") & vbNewLine)
+                RichTextBox2.AppendText(line.Replace("PU", "G0 X").Replace(",", " Y").Replace(";", "") & vbNewLine) : Application.DoEvents()
             End If
 
             If line.Contains("PD") AndAlso line.Contains(",") Then
-                RichTextBox2.AppendText(line.Replace("PD", "G0 X").Replace(",", " Y").Replace(";", "") & vbNewLine)
+                RichTextBox2.AppendText(line.Replace("PD", "G0 X").Replace(",", " Y").Replace(";", "") & vbNewLine) : Application.DoEvents()
             End If
 
             If line.Contains("PU;") Then
-                RichTextBox2.AppendText("G0 Z0" & vbNewLine)
+                RichTextBox2.AppendText("G0 Z0" & vbNewLine) : Application.DoEvents()
             End If
 
             If line.Contains("PD;") Then
-                RichTextBox2.AppendText("G0 Z" & TextBox1.Text & vbNewLine)
+                RichTextBox2.AppendText("G0 Z" & TextBox1.Text & vbNewLine) : Application.DoEvents()
             End If
 
-            ProgressBar1.Value = ProgressBar1.Value + 1
+            ProgressBar1.Value = ProgressBar1.Value + 1 : Application.DoEvents()
 
         Next
 
         System.Threading.Thread.Sleep(500) : Application.DoEvents()
 
-        Dim bmp As Bitmap = New Drawing.Bitmap(PictureBox1.Width, PictureBox1.Height)
+        Dim bmp As Bitmap = New Drawing.Bitmap(PictureBox1.Width, PictureBox1.Height) : Application.DoEvents()
 
-        For i As Integer = 0 To RichTextBox2.Lines.Count - 1
+        For i As Integer = 0 To RichTextBox2.Lines.Count - 1 : Application.DoEvents()
 
             If RichTextBox2.Lines(i).Contains("X") Then
                 Dim strRegex2 As String = "\d+"
@@ -90,24 +91,24 @@ Public Class Form1
 
                 Dim matches As New ArrayList
 
-                For Each myMatchx As Match In myRegex2.Matches(RichTextBox2.Lines(i).ToString)
+                For Each myMatchx As Match In myRegex2.Matches(RichTextBox2.Lines(i).ToString) : Application.DoEvents()
 
                     If myMatchx.Success Then
                         If Not myMatchx.Value.ToString = "0" Then
-                            matches.Add(myMatchx.Value.ToString)
+                            matches.Add(myMatchx.Value.ToString) : Application.DoEvents()
                         End If
                     End If
                 Next
 
-                Dim newstr = RichTextBox2.Lines(i).Replace(matches(1).ToString, (matches(1).ToString / 40).ToString.Replace(",", ".")).Replace(matches(0).ToString, (matches(0).ToString / 40)).Replace(",", ".").ToString
+                Dim newstr = RichTextBox2.Lines(i).Replace(matches(1).ToString, (matches(1).ToString / 40).ToString.Replace(",", ".")).Replace(matches(0).ToString, (matches(0).ToString / 40)).Replace(",", ".").ToString : Application.DoEvents()
 
-                RichTextBox3.AppendText(newstr & vbNewLine)
+                RichTextBox3.AppendText(newstr & vbNewLine) : Application.DoEvents()
 
-                Dim lineclean As String = newstr.Replace("G0 X", "").Replace("Y", "")
-                Dim counts As String() = lineclean.Split(New Char() {" "c})
+                Dim lineclean As String = newstr.Replace("G0 X", "").Replace("Y", "") : Application.DoEvents()
+                Dim counts As String() = lineclean.Split(New Char() {" "c}) : Application.DoEvents()
 
-                counts1x = counts(0).Split(New Char() {"."c})
-                counts1y = counts(1).Split(New Char() {"."c})
+                counts1x = counts(0).Split(New Char() {"."c}) : Application.DoEvents()
+                counts1y = counts(1).Split(New Char() {"."c}) : Application.DoEvents()
 
                 x1 = xold
                 y1 = yold
@@ -117,14 +118,19 @@ Public Class Form1
                 xold = x2
                 yold = y2
 
-                draw()
-            Else
-                RichTextBox3.AppendText(RichTextBox2.Lines(i).ToString & vbNewLine)
-            End If
-            ProgressBar2.Value = i
-        Next
+                PictureBox1.Focus() : Application.DoEvents()
 
-        ' PictureBox1.Image.Save("myimage.jpg", Drawing.Imaging.ImageFormat.Jpeg)
+                draw() : Application.DoEvents()
+
+                '   RichTextBox3.SelectionStart = Len(RichTextBox3.Text) : Application.DoEvents()
+
+                '  RichTextBox3.ScrollToCaret() : Application.DoEvents()
+            Else
+                RichTextBox3.AppendText(RichTextBox2.Lines(i).ToString & vbNewLine) : Application.DoEvents()
+            End If
+            ProgressBar2.Value = i : Application.DoEvents()
+
+        Next
 
         Dim s As Size = PictureBox1.Size
         Dim memoryImage = New Bitmap(s.Width, s.Height)
@@ -132,6 +138,8 @@ Public Class Form1
         Dim ScreenPos As Point = Me.PictureBox1.PointToScreen(New Point(0, 0))
         memoryGraphics.CopyFromScreen(ScreenPos.X, ScreenPos.Y, 0, 0, s)
         PictureBox1.Image = memoryImage
+
+        ' PictureBox1.Image.Save("myimage.jpg", Drawing.Imaging.ImageFormat.Jpeg)
 
         Button3.Enabled = True
     End Sub
